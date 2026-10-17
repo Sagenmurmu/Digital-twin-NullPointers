@@ -19,6 +19,27 @@ import json
 import urllib.request
 import urllib.error
 
+import io
+
+# Ensure UTF-8 output encoding on Windows consoles
+if sys.platform == "win32":
+    if sys.stdout and hasattr(sys.stdout, "buffer") and not getattr(sys.stdout, "closed", False):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            try:
+                sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+    if sys.stderr and hasattr(sys.stderr, "buffer") and not getattr(sys.stderr, "closed", False):
+        try:
+            sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            try:
+                sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
 # Add backend to sys.path so we can import app modules
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 

@@ -368,6 +368,7 @@ async def toggle_simulation():
         simulation_engine.start()
     return {"status": "ok", "is_running": simulation_engine.is_running}
 @app.post("/agents/chat", tags=["Agents"])
+@app.post("/chat", tags=["Agents"])
 async def chat_with_machine(request: ChatRequest, db: Session = Depends(get_db)):
     """
     Handles conversational AI interaction with system awareness.
