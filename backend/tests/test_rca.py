@@ -4,7 +4,7 @@ Run from backend/ directory: python test_rca.py
 """
 import sys, os, json, urllib.request, urllib.error
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
 PASS = "PASS"

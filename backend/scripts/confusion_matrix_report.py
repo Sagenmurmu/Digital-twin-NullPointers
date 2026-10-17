@@ -1,8 +1,8 @@
 """
 confusion_matrix_report.py — Full ML Confusion Matrix & Metrics Report
 """
-import sys
-sys.path.insert(0, '.')
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
 from sklearn.metrics import (

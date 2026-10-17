@@ -317,6 +317,11 @@ class RCAEngine:
         LOGIC:   Motor draws more current trying to move against resistance,
                  but position doesn't advance as expected → large pos_error
         """
+        if f["abs_pos_error"] <= POS_ERROR_HIGH:
+            return None
+        if f["actual_current"] <= CURRENT_HIGH_ABS and f["current_spike_factor"] <= CURRENT_SPIKE_RATIO:
+            return None
+
         triggered = []
         rule_confidence = 0.0
 
@@ -400,6 +405,9 @@ class RCAEngine:
                  current is normal, the issue is in the heater subsystem
                  rather than motor mechanics.
         """
+        if f["abs_temp_error"] <= TEMP_ERROR_HIGH:
+            return None
+
         triggered = []
         rule_confidence = 0.0
 
@@ -441,6 +449,9 @@ class RCAEngine:
                  but position is diverging from the digital twin prediction.
                  Classic symptom of step loss or reference drift.
         """
+        if f["abs_pos_error"] <= POS_ERROR_HIGH:
+            return None
+
         triggered = []
         rule_confidence = 0.0
 
@@ -485,6 +496,10 @@ class RCAEngine:
                  the energy is being absorbed as heat (stall) or lost to
                  supply instability.
         """
+        # A current spike or abnormally high current is a mandatory precondition
+        if f["current_spike_factor"] <= CURRENT_SPIKE_RATIO and f["actual_current"] <= CURRENT_HIGH_ABS:
+            return None
+
         triggered = []
         rule_confidence = 0.0
 

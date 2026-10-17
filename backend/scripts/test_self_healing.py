@@ -2,6 +2,15 @@ import asyncio
 import httpx
 import time
 import random
+import sys
+import io
+
+if sys.platform == "win32":
+    if sys.stdout and hasattr(sys.stdout, "buffer") and not getattr(sys.stdout, "closed", False):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
 
 API_URL = "http://localhost:8000/telemetry"
 

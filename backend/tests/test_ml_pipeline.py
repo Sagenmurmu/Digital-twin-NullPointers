@@ -20,7 +20,7 @@ import urllib.request
 import urllib.error
 
 # Add backend to sys.path so we can import app modules
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 PASS = "✅ PASS"
 FAIL = "❌ FAIL"
